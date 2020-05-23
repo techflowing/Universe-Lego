@@ -1,0 +1,8 @@
+apply from: rootProject.file('library.gradle')
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation deps.android.v7
+    implementation deps.android.recyclerview
+    implementation deps.module.lego.util
+}

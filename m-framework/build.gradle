@@ -1,0 +1,12 @@
+apply from: rootProject.file('library.gradle')
+
+apply plugin: 'com.jakewharton.butterknife'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation deps.android.v7
+    implementation deps.android.v4
+    implementation deps.android.annotation
+    implementation deps.third.butterknife
+    kapt deps.processor.butterknife
+}

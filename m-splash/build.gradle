@@ -1,6 +1,17 @@
 apply from: rootProject.file('library.gradle')
 
+apply plugin: 'com.jakewharton.butterknife'
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation deps.module.runtime
+    implementation deps.module.lego.runtime
+    implementation deps.module.lego.framework
+    implementation deps.module.lego.util
+    implementation deps.android.v4
+    implementation deps.android.v7
+    implementation deps.third.butterknife
+    implementation deps.third.gson
+    implementation deps.third.glide
+    implementation deps.third.indicator_view
+    annotationProcessor deps.processor.butterknife
 }

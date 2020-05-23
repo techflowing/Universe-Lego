@@ -1,0 +1,8 @@
+apply from: rootProject.file('library.gradle')
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation deps.module.lego.framework
+    implementation deps.android.v7
+    implementation deps.third.agentweb
+}

@@ -20,6 +20,7 @@ open class AbsModuleApplication : IModuleApplication {
         /**
          * 获取ApplicationContext
          */
+        @JvmStatic
         fun getAppContext(): Context {
             return AppRuntime.getAppContext()
         }
@@ -27,6 +28,7 @@ open class AbsModuleApplication : IModuleApplication {
         /**
          * 获取Application
          */
+        @JvmStatic
         fun getApplication(): Application {
             return AppRuntime.application
         }

@@ -1,0 +1,8 @@
+apply from: rootProject.file('library.gradle')
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation deps.third.gson
+    implementation deps.android.annotation
+    implementation deps.module.lego.runtime
+}
