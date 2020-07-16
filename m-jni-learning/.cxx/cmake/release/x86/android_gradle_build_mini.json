@@ -1,0 +1,19 @@
+{
+  "buildFiles": [
+    "/Users/yuanzeng/Library/Android/sdk/ndk-bundle/build/cmake/android.toolchain.cmake",
+    "/Users/yuanzeng/Library/Android/sdk/ndk-bundle/build/cmake/platforms.cmake",
+    "/Users/yuanzeng/AndroidProject/Universe/lego/m-jni-learning/src/main/cpp/CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "/Users/yuanzeng/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/yuanzeng/AndroidProject/Universe/lego/m-jni-learning/.cxx/cmake/release/x86\" clean"
+  ],
+  "buildTargetsCommand": "/Users/yuanzeng/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/Users/yuanzeng/AndroidProject/Universe/lego/m-jni-learning/.cxx/cmake/release/x86\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "native-lib-Release-x86": {
+      "artifactName": "native-lib",
+      "buildCommand": "/Users/yuanzeng/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/yuanzeng/AndroidProject/Universe/lego/m-jni-learning/.cxx/cmake/release/x86\" native-lib",
+      "abi": "x86",
+      "output": "/Users/yuanzeng/AndroidProject/Universe/lego/m-jni-learning/build/intermediates/cmake/release/obj/x86/libnative-lib.so"
+    }
+  }
+}

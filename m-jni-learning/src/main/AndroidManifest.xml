@@ -1,0 +1,7 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="win.techflowing.android.jni" >
+
+    <application>
+        <activity android:name=".JniLearningActivity" />
+    </application>
+</manifest>

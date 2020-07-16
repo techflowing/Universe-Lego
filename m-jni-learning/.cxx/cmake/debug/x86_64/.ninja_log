@@ -1,0 +1,5 @@
+# ninja log v5
+0	8	0	clean	bdcb6c50104fa5da
+0	8	0	clean	bdcb6c50104fa5da
+1	424	1593962673	CMakeFiles/native-lib.dir/native-lib.cpp.o	5ed4653eb940ff88
+424	532	1593962673	/Users/yuanzeng/AndroidProject/Universe/lego/m-jni-learning/build/intermediates/cmake/debug/obj/x86_64/libnative-lib.so	dfc2b1d6b2e48af3
