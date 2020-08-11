@@ -1,3 +1,0 @@
-ninja: Entering directory `/Users/yuanzeng/AndroidProject/Universe/lego/m-jni-learning/.cxx/cmake/debug/arm64-v8a'
-[1/2] Building CXX object CMakeFiles/native-lib.dir/native-lib.cpp.o
-[2/2] Linking CXX shared library /Users/yuanzeng/AndroidProject/Universe/lego/m-jni-learning/build/intermediates/cmake/debug/obj/arm64-v8a/libnative-lib.so

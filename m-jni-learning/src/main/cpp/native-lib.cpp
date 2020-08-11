@@ -2,7 +2,7 @@
 #include <string>
 #include <android/log.h>  // 调用Android 方法打印日志
 
-#define TAG  "JniLearningActivity"
+#define TAG  "JNI-Learning"
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR,TAG ,__VA_ARGS__) // 定义LOGE类型，__VA_ARGS__ 为可变参数的宏定义
 
 
@@ -31,13 +31,99 @@ Java_win_techflowing_android_jni_JniLearningActivity_testBasicType(JNIEnv *env, 
     LOGE("Char: %c", j_char);
     LOGE("Short: %hd", j_short);
     LOGE("Int: %d", j_int);
-    LOGE("Long: %ld", j_long);
+    LOGE("Long: %lld", j_long);
     LOGE("Float: %f", j_float);
     LOGE("Double: %f", j_double);
 }
-
 extern "C"
 JNIEXPORT void JNICALL
-Java_win_techflowing_android_jni_JniLearningActivity_testReferenceType(JNIEnv *env, jobject thiz) {
+Java_win_techflowing_android_jni_JniLearningActivity_testReferenceType(JNIEnv *env, jobject thiz, jclass clz, jthrowable throwable,
+                                                                       jstring string, jobject object, jobjectArray javaObjects,
+                                                                       jbooleanArray booleans, jbyteArray bytes, jcharArray chars,
+                                                                       jshortArray shorts, jintArray ints, jlongArray longs,
+                                                                       jfloatArray floats, jdoubleArray doubles) {
+    LOGE("JNI 引用类型测试>>>");
 
+    // Java 对象，jclass
+    jmethodID construct = env->GetMethodID(clz, "<init>", "()V");
+    jobject obj = env->NewObject(clz, construct);
+    jfieldID numField = env->GetFieldID(clz, "num", "I");
+    int num = env->GetIntField(obj, numField);
+    LOGE("获取Model对象中的num属性值：%d", num);
+
+    // Throwable
+    // env->Throw(throwable);
+
+    // String
+    const char *charString = env->GetStringUTFChars(string, NULL);
+    if (charString != NULL) {
+        LOGE("String 内容为《 %s 》，字符串长度：%d", charString, env->GetStringLength(string));
+    }
+    env->ReleaseStringUTFChars(string, charString);
+
+    // Object 对象
+    jfieldID fieldID = env->GetFieldID(env->GetObjectClass(object), "num", "I");
+    LOGE("获取Model对象中的num属性值：%d", env->GetIntField(object, fieldID));
+
+    // Object 数组
+    // 获取第0个元素
+    jobject jobject1 = env->GetObjectArrayElement(javaObjects, 0);
+    jfieldID jfieldId = env->GetFieldID(env->GetObjectClass(jobject1), "num", "I");
+    LOGE("获取Model对象中的num属性值：%d", env->GetIntField(jobject1, fieldID));
+
+    // Bool 数组
+    jboolean *jboolean = env->GetBooleanArrayElements(booleans, NULL);
+    for (int i = 0; i < env->GetArrayLength(booleans); ++i) {
+        LOGE("Boolean 数组[%d]元素: %hhu", i, *(jboolean + i));
+    }
+    env->ReleaseBooleanArrayElements(booleans, jboolean, 0);
+
+    // Byte 数组
+    jbyte *jbyte1 = env->GetByteArrayElements(bytes, NULL);
+    for (int i = 0; i < env->GetArrayLength(bytes); ++i) {
+        LOGE("Byte 数组[%d]元素: %hhd", i, *(jbyte1 + i));
+    }
+    env->ReleaseByteArrayElements(bytes, jbyte1, 0);
+
+    // Char 数组
+    jchar *jchar1 = env->GetCharArrayElements(chars, NULL);
+    for (int i = 0; i < env->GetArrayLength(chars); ++i) {
+        LOGE("Char 数组[%d]元素: %c", i, *(jchar1 + i));
+    }
+    env->ReleaseCharArrayElements(chars, jchar1, 0);
+
+    // Short 数组
+    jshort *jshort1 = env->GetShortArrayElements(shorts, NULL);
+    for (int i = 0; i < env->GetArrayLength(shorts); ++i) {
+        LOGE("Short 数组[%d]元素: %hd", i, *(jshort1 + i));
+    }
+    env->ReleaseShortArrayElements(shorts, jshort1, 0);
+
+    // Int 数组
+    jint *jint = env->GetIntArrayElements(ints, NULL);
+    for (int i = 0; i < env->GetArrayLength(ints); ++i) {
+        LOGE("Int 数组[%d]元素: %d", i, *(jint + i));
+    }
+    env->ReleaseIntArrayElements(ints, jint, 0);
+
+    // Long 数组
+    jlong *jlong1 = env->GetLongArrayElements(longs, NULL);
+    for (int i = 0; i < env->GetArrayLength(longs); ++i) {
+        LOGE("Long 数组[%d]元素: %lld", i, *(jlong1 + i));
+    }
+    env->ReleaseLongArrayElements(longs, jlong1, 0);
+
+    // Float 数组
+    jfloat *jfloat1 = env->GetFloatArrayElements(floats, NULL);
+    for (int i = 0; i < env->GetArrayLength(floats); ++i) {
+        LOGE("Float 数组[%d]元素: %f", i, *(jfloat1 + i));
+    }
+    env->ReleaseFloatArrayElements(floats, jfloat1, 0);
+
+    // Double 数组
+    jdouble *jdouble1 = env->GetDoubleArrayElements(doubles, NULL);
+    for (int i = 0; i < env->GetArrayLength(doubles); ++i) {
+        LOGE("Double 数组[%d]元素: %f", i, *(jdouble1 + i));
+    }
+    env->ReleaseDoubleArrayElements(doubles, jdouble1, 0);
 }

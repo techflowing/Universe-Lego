@@ -49,6 +49,26 @@ public class JniLearningActivity extends AppCompatActivity {
                 testBasicType(100, (byte) 8, (short) 10, 10000000000L, 30.1f, 60.2d, 'A', true);
             }
         });
+
+        addButton("测试引用类型转换", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                testReferenceType(Model.class,
+                        new IllegalStateException("来自Java层的异常"),
+                        "来自Java层的String",
+                        new Model().setNum(200),
+                        new Model[]{new Model()},
+                        new boolean[]{true, false},
+                        new byte[]{(byte) 8, (byte) 20},
+                        new char[]{'A', 'B'},
+                        new short[]{(short) 10, (short) 11},
+                        new int[]{1, 2, 3},
+                        new long[]{10000000000L, 200000000000L},
+                        new float[]{0.1f, 0.3f},
+                        new double[]{20.3d, 30.4d}
+                );
+            }
+        });
     }
 
     private native void sayHello();
@@ -66,7 +86,9 @@ public class JniLearningActivity extends AppCompatActivity {
     /**
      * 测试引用类型
      */
-    private native void testReferenceType();
+    private native void testReferenceType(Class<Model> clz, Throwable throwable, String string, Model object, Model[] javaObjects,
+                                          boolean[] booleans, byte[] bytes, char[] chars, short[] shorts, int[] ints, long[] longs,
+                                          float[] floats, double[] doubles);
 
     /**
      * 添加测试按钮
