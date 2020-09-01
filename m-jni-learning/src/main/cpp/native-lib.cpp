@@ -127,3 +127,68 @@ Java_win_techflowing_android_jni_JniLearningActivity_testReferenceType(JNIEnv *e
     }
     env->ReleaseDoubleArrayElements(doubles, jdouble1, 0);
 }
+
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_win_techflowing_android_jni_JniLearningActivity_stringCatFromJNI(JNIEnv *env, jobject thiz, jstring string) {
+    const char *charString = env->GetStringUTFChars(string, NULL);
+    jint length = env->GetStringLength(string);
+    char *dest = static_cast<char *>(malloc(length));
+    strcat(strcpy(dest, charString), " 这是 JNI 拼接的内容");
+    return env->NewStringUTF(dest);
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_win_techflowing_android_jni_JniLearningActivity_accessField(JNIEnv *env, jobject thiz, jobject java_class) {
+    jclass jclass1 = env->GetObjectClass(java_class);
+    jfieldID jfieldId = env->GetFieldID(jclass1, "name", "Ljava/lang/String;");
+    jstring value = (jstring) (env->GetObjectField(java_class, jfieldId));
+    const char *string = env->GetStringUTFChars(value, NULL);
+    if (string != NULL) {
+        LOGE("String 内容为《 %s 》，字符串长度：%d", string, env->GetStringLength(value));
+    }
+    env->ReleaseStringUTFChars(value, string);
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_win_techflowing_android_jni_JniLearningActivity_accessStaticField(JNIEnv *env, jobject thiz, jclass clz) {
+
+    jfieldID jfieldId = env->GetStaticFieldID(clz, "staticName", "Ljava/lang/String;");
+    jstring value = (jstring) env->GetStaticObjectField(clz, jfieldId);
+    const char *string = env->GetStringUTFChars(value, NULL);
+    if (string != NULL) {
+        LOGE("String 内容为《 %s 》，字符串长度：%d", string, env->GetStringLength(value));
+    }
+    env->ReleaseStringUTFChars(value, string);
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_win_techflowing_android_jni_JniLearningActivity_accessMethod(JNIEnv *env, jobject thiz, jobject java_class) {
+    jclass jclass1 = env->GetObjectClass(java_class);
+    jmethodID jmethodId = env->GetMethodID(jclass1, "genRandomInt", "(I)I");
+    // 调用方法
+    jint jint1 = env->CallIntMethod(java_class, jmethodId, 100);
+    LOGE("从Java成员方法 genRandomInt 获取到的值: %d", jint1);
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_win_techflowing_android_jni_JniLearningActivity_accessStaticMethod(JNIEnv *env, jobject thiz, jclass clz) {
+    jmethodID jmethodId = env->GetStaticMethodID(clz, "getUUID", "()Ljava/lang/String;");
+    // 调用方法
+    jstring value = (jstring) env->CallStaticObjectMethod(clz, jmethodId);
+    LOGE("从Java静态方法 getUUID 获取到的内容为《 %s 》，字符串长度：%d", env->GetStringUTFChars(value, NULL), env->GetStringLength(value));
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_win_techflowing_android_jni_JniLearningActivity_accessSuperMethod(JNIEnv *env, jobject thiz, jobject java_class) {
+    jclass jclass1 = env->GetObjectClass(java_class);
+    // 获取父类Class
+    jclass superClass = env->FindClass("win/techflowing/android/jni/JavaSuperClass");
+    jmethodID jmethodId = env->GetMethodID(superClass, "javaMethod", "()V");
+    env->CallNonvirtualVoidMethod(java_class, superClass, jmethodId);
+}
